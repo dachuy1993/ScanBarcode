@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:model="clr-namespace:MAUIApplication.Models"
+             xmlns:viewmodel="clr-namespace:MAUIApplication.ViewModels"
+             x:DataType="viewmodel:ScanViewModel"
+             x:Class="MAUIApplication.Views.ScanPage"
+             Title="Quét mã QR">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Lưu" Command="{Binding AddCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        
+        <Grid RowDefinitions="120,*,*,auto,auto">
+            <Grid ColumnDefinitions="*,*">
+                <Border Stroke="gray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Tình trạng" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center"/>
+                        <Border x:Name="BorderStatus" Grid.Row="1" Stroke="Gray" BackgroundColor="{Binding StatusColor}"  HeightRequest="80" WidthRequest="200" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+                            <Label Text="{Binding StatusContent}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25"></Label>
+                        </Border>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1" Stroke="Gray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+                    <Grid RowDefinitions="auto,auto,60" >
+                        <HorizontalStackLayout Margin="3,10,0,0">
+                            <Label Text="Mã NV:" FontSize="16" FontAttributes="Bold" ></Label>
+                            <Label x:Name="lbEmpId" FontSize="16" Text="{Binding EmpIdLogin}"  FontAttributes="Bold" Margin="10,0,0,0"></Label>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Row="1" Margin="3,0,0,0">
+                            <Label  Text="Tên NV:" FontSize="16" FontAttributes="Bold"></Label>
+                            <Label x:Name="lbEmpNm" FontSize="16" Text="{Binding EmpNmLogin}" FontAttributes="Bold" Margin="6,0,0,0"></Label>
+                        </HorizontalStackLayout>
+                        <VerticalStackLayout  WidthRequest="230"  Grid.Row="2" Padding="0,0,0,2" >
+                            <!--<dxe:ComboBoxEdit x:Name="CbShift" LabelText="Ca làm việc" BorderColor="Gray" HeightRequest="50" SelectionChanged="CbShift_SelectionChanged">
+                                <dxe:ComboBoxEdit.ItemsSource >
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Ca A</x:String>
+                                        <x:String>Ca B</x:String>
+                                    </x:Array>
+                                </dxe:ComboBoxEdit.ItemsSource>
+                            </dxe:ComboBoxEdit>-->
+                            <dxe:ComboBoxEdit x:Name="CbShift" LabelText=" Ca làm việc"  HeightRequest="55" SelectionChanged="CbShift_SelectionChanged" >
+                                
+                            </dxe:ComboBoxEdit>
+                        </VerticalStackLayout>
+                    </Grid>
+                    
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1" WidthRequest="600"  >
+                <Border Stroke="gray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+                    <Grid RowDefinitions="30,20,auto">
+                        <Grid>
+                            <Label Text="Kết quả" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center"/>
+                        </Grid>
+                        <Grid Grid.Row="1" BackgroundColor="lightgray" Margin="10,0,10,0">
+                            <CollectionView ItemsSource="{Binding ListviewBarcodeTitleResult}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:TitleResult">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="400"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{Binding TitleBarcode}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                            <Label Grid.Column="1" Text="{Binding TitleNum}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                        <Grid Grid.Row="2" WidthRequest="550"  Margin="10,0,10,10">
+                            <CollectionView ItemsSource ="{Binding ListviewbarcodeResult}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:BarcodeScanResult">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="400"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{Binding Barcode}" HorizontalOptions="Center" FontSize="15"/>
+                                            <Label Grid.Column="1" Text="{Binding Num}" HorizontalOptions="Center" FontSize="15"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Grid>
+                </Border>
+                
+            </Grid>
+            <Grid Grid.Row="2" WidthRequest="600"  >
+                <Border Stroke="gray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+                    <Grid RowDefinitions="30,20,auto">
+                        <Grid>
+                            <Label Text="Danh sách đã quét" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center"/>
+                        </Grid>
+                        <Grid Grid.Row="1" BackgroundColor="lightgray" Margin="10,0,10,0">
+                            <CollectionView ItemsSource="{Binding ListviewBarcodeTitle}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:TitleScan">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="300"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{Binding TitleBarcode}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                            <Label Grid.Column="1" Text="{Binding BarcodeStan}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                            <Label Grid.Column="2" Text="{Binding BarcodePro}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                        <Grid Grid.Row="2" WidthRequest="550"  Margin="10,0,10,10">
+                        <CollectionView ItemsSource="{Binding Listviewbarcode}" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:BarcodeScan">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="300"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{Binding Barcode}" FontSize="15" TextColor="{Binding Color}"/>
+                                            <Label Grid.Column="1" Text="{Binding BarcodeSS}" HorizontalOptions="Center" FontSize="15" TextColor="{Binding Color}"/>
+                                            <Label Grid.Column="2" Text="{Binding BarcodeSX}" HorizontalOptions="Center" FontSize="15" TextColor="{Binding Color}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+            </Grid>
+            <!--<Grid Grid.Row="2" WidthRequest="600" BackgroundColor="AliceBlue">
+                <Border Stroke="gray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+                    <ListView x:Name="listviewbarcode"  >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <StackLayout>
+                                        <Label  Text="{Binding Barcode}" HorizontalOptions="Center" TextColor="{Binding Color}" HeightRequest="20"  />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+            </Grid>-->
+            <Grid Grid.Row="3">
+                <HorizontalStackLayout>
+                    <Border Stroke="gray" HeightRequest="50" StrokeThickness="0.5" WidthRequest="200" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Grid ColumnDefinitions="150,50">
+                            
+                            <dxe:TextEdit BorderThickness="0"  Text="{Binding TxtBarcode}" LabelText="Mã vạch " Margin="10,0,0,10" WidthRequest="170" HeightRequest="60" IsEnabled="False">
+
+                            </dxe:TextEdit>
+                            <Border Grid.Column="1" BackgroundColor="LightYellow" Stroke="Gray" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="1">
+                                <Button BackgroundColor="LightYellow"  HeightRequest="40" WidthRequest="40" Margin="0,0,0,0" ImageSource="icon_camera.png" Command="{Binding GotoScanCommand}"></Button>
+                            </Border>
+                            
+                        </Grid>
+                    </Border>
+                    <Border Stroke="gray" HeightRequest="50" StrokeThickness="0.5" WidthRequest="200" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Grid ColumnDefinitions="150,50">
+
+                            <dxe:TextEdit BorderThickness="0"  Text="{Binding TxtBarcodePro}" LabelText="Mã SP(SX)" Margin="10,0,0,10" WidthRequest="170" HeightRequest="60" IsEnabled="False">
+
+                            </dxe:TextEdit>
+                            <Border Grid.Column="1" BackgroundColor="LightYellow" Stroke="Gray" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="1">
+                                <Button Text="{Binding ProContent}" TextColor="Black" FontSize="18" BackgroundColor="LightYellow" HeightRequest="40" WidthRequest="40" Command="{Binding GotoScanProCommand}"></Button>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                    <Border Stroke="gray" HeightRequest="50" StrokeThickness="0.5" WidthRequest="200" StrokeShape="RoundRectangle 10,10,10,10">
+                        <Grid ColumnDefinitions="150,50">
+
+                            <dxe:TextEdit BorderThickness="0"  Text="{Binding TxtBarcodeStan}" LabelText="Mã SP(OK)" Margin="10,0,0,10" WidthRequest="170" HeightRequest="60" >
+
+                            </dxe:TextEdit>
+                            <Border Grid.Column="1" BackgroundColor="LightYellow" Stroke="Gray" StrokeShape="RoundRectangle 10,10,10,10" StrokeThickness="1">
+                                <Button  BackgroundColor="LightYellow" HeightRequest="40" WidthRequest="40" Margin="0,0,0,0" ImageSource="icons_convert32.png" Command="{Binding GotoScanStandCommand}"></Button>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+
+
+                    <!--<dxe:TextEdit x:Name="BarcodePro" LabelText="Mã SP(SX) " Margin="10,10,0,10" WidthRequest="170" HeightRequest="50" IsEnabled="False"/>
+                    <dxe:TextEdit x:Name="BarcodeStan" LabelText="Mã SP(OK)" Margin="10,10,0,10" WidthRequest="170" HeightRequest="50" IsEnabled="False"/>-->
+                </HorizontalStackLayout>
+            </Grid>
+            <!--<Grid Grid.Row="4">
+                <HorizontalStackLayout>
+                    <Button Text="Start" WidthRequest="200" HeightRequest="50" Margin="30,0,0,20" Command="{Binding GotoScanCommand}">
+
+                    </Button>
+                    <Button Text="Save" WidthRequest="200" HeightRequest="50" Margin="120,0,0,20">
+
+                    </Button>
+                </HorizontalStackLayout>
+            </Grid>-->
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

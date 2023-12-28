@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             x:Class="MAUIApplication.Views.HistoryScanDetailPage"
+             Title="Danh sách QR">
+    
+    <Grid RowDefinitions="50,*">
+        <Border Grid.Row="0" Stroke="gray" StrokeShape="RoundRectangle 10,10,10,10" Margin="3">
+            <Label Text="{Binding DateT}" Padding="10" FontAttributes="Bold" FontSize="20"/>
+        </Border>
+        
+        <Border Grid.Row="1" Stroke="gray" StrokeShape="RoundRectangle 10,10,10,10" Margin="3">
+            <Grid RowDefinitions="30,*">
+                <Grid BackgroundColor="LightGray" Margin="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="70"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="QR Code" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="15"/>
+                    <Label Grid.Column="1" Text="Mã SP(SS)" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="15"/>
+                    <Label Grid.Column="2" Text="Mã SP(SX)" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="15"/>
+                    <Label Grid.Column="3" Text="Trạng thái" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="15"/>
+                </Grid>
+                <dxcv:DXCollectionView Grid.Row="1" ItemsSource="{Binding BarcodeScanListDetail}">
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="280"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Barcode}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="1" Text="{Binding BarcodeSS}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="2" Text="{Binding BarcodeSX}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="3" Text="{Binding Status}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15" TextColor="{Binding Color}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+                </dxcv:DXCollectionView>
+            </Grid>
+        </Border>
+        
+    </Grid>
+</ContentPage>

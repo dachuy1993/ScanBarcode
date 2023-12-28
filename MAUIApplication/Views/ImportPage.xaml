@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:model="clr-namespace:MAUIApplication.Models"
+             x:Class="MAUIApplication.Views.ImportPage"
+             Title="Nhập kho">
+    <Grid ColumnDefinitions="*,*">
+        <!--truy vấn vế trái-->
+        <Border Stroke="lightgray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10" Margin="2,0,0,0">
+            <Grid RowDefinitions="60,60,*" >
+                <Grid ColumnDefinitions="*,*" Margin="0,10,4,0">
+
+                    <Grid>
+                        <dxe:ComboBoxEdit LabelText="PHƯƠNG THỨC XUẤT" CornerRadius="10" HeightRequest="60" TextFontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" >
+
+                        </dxe:ComboBoxEdit>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <dxe:ComboBoxEdit Grid.Row="1" LabelText="KHO" CornerRadius="10" HeightRequest="60" TextFontAttributes="Bold" VerticalOptions="Center" ></dxe:ComboBoxEdit>
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Row="1" ColumnDefinitions="80,*,*" Padding="0,10,0,0">
+                    <Label Text="Ngày XL" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18"></Label>
+                    <dxe:DateEdit Grid.Column="1" LabelText="Từ ngày" Margin="0,0,2,0" CornerRadius="10"></dxe:DateEdit>
+                    <dxe:DateEdit Grid.Column="2" LabelText="Đến ngày" Margin="2,0,2,0" CornerRadius="10"></dxe:DateEdit>
+                </Grid>
+                <!--Load dữ liệu-->
+                <ScrollView Grid.Row="2" Margin="5,15,0,0" >
+                    <StackLayout>
+                        <Grid RowDefinitions="20,*">
+                            <Grid HeightRequest="20" BackgroundColor="LightGray">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="DATE" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="1" Text="TIME" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="2" Text="MODEL" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="3" Text="CUS CODE" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="4" Text="PST" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="5" Text="PREP"  FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label Grid.Column="6" Text="LOT NO" FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label Grid.Column="7" Text="WONO" FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label Grid.Column="8" Text="QTY" FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label Grid.Column="9" Text="REMARK" FontAttributes="Bold" HorizontalOptions="Center" />
+                                <Label Grid.Column="10" Text="DEL" FontAttributes="Bold" HorizontalOptions="Center" />
+                            </Grid>
+                            <Grid Grid.Row="1" BackgroundColor="White">
+                                <dxcv:DXCollectionView ItemsSource="{Binding ListExportData}">
+                                    <dxcv:DXCollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="150"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{Binding Date}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="1" Text="{Binding TIME}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="2" Text="{Binding MODEL}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="3" Text="{Binding CUSCODE}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="4" Text="{Binding PST}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="5" Text="{Binding PREP}"  FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="6" Text="{Binding LOTNO}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="7" Text="{Binding WONO}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="8" Text="{Binding QTY}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="9" Text="{Binding REMARK}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                                <Label Grid.Column="10" Text="{Binding DEL}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </dxcv:DXCollectionView.ItemTemplate>
+                                </dxcv:DXCollectionView>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+
+            </Grid>
+        </Border>
+
+        <!--truy vấn vế phải-->
+        <Grid Grid.Column="1" RowDefinitions="50,*" >
+            <Border Stroke="lightgray" HeightRequest="50" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10" Margin="2,0,0,0">
+                <Grid ColumnDefinitions="*,*,*,*">
+                    <Border Stroke="black" StrokeThickness="3" Margin="2" StrokeShape="RoundRectangle 10,10,10,10">
+                        <StackLayout BackgroundColor="LightYellow"  >
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer  
+                                    Command="{Binding GotoExportPageCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <HorizontalStackLayout>
+                                <Image Source="icons_add.png" HeightRequest="30" Margin="10,5,0,0" />
+                                <Label Grid.Row="1" Text="Thêm" FontAttributes="Bold" HorizontalOptions="Center" FontFamily="Roboto" FontSize="20" Margin="0,5,0,0"/>
+                            </HorizontalStackLayout>
+
+                        </StackLayout>
+                    </Border>
+                    <Border Grid.Column="1" Stroke="black" StrokeThickness="3" Margin="2" StrokeShape="RoundRectangle 10,10,10,10">
+                        <StackLayout BackgroundColor="LightYellow"  >
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer  
+                                    Command="{Binding GotoExportPageCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <HorizontalStackLayout>
+                                <Image Source="icons_convert32.png" HeightRequest="30" Margin="10,5,0,0" />
+                                <Label Grid.Row="1" Text="SỬA" FontAttributes="Bold" HorizontalOptions="Center" FontFamily="Roboto" FontSize="20" Margin="0,5,0,0"/>
+                            </HorizontalStackLayout>
+
+                        </StackLayout>
+                    </Border>
+                    <Border Grid.Column="2" Stroke="black" StrokeThickness="3" Margin="2" StrokeShape="RoundRectangle 10,10,10,10">
+                        <StackLayout BackgroundColor="LightYellow"  >
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer  
+                                    Command="{Binding GotoExportPageCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <HorizontalStackLayout>
+                                <Image Source="icons_save.png" HeightRequest="30" Margin="10,5,0,0" />
+                                <Label Grid.Row="1" Text="LƯU" FontAttributes="Bold" HorizontalOptions="Center" FontFamily="Roboto" FontSize="20" Margin="0,5,0,0"/>
+                            </HorizontalStackLayout>
+
+                        </StackLayout>
+                    </Border>
+                    <Border Grid.Column="3" Stroke="black" StrokeThickness="3" Margin="2" StrokeShape="RoundRectangle 10,10,10,10">
+                        <StackLayout BackgroundColor="LightYellow"  >
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer  
+                                    Command="{Binding GotoExportPageCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <HorizontalStackLayout>
+                                <Image Source="iconscan.png" HeightRequest="30" Margin="10,5,0,0" />
+                                <Label Grid.Row="1" Text="QUÉT" FontAttributes="Bold" HorizontalOptions="Center" FontFamily="Roboto" FontSize="20" Margin="0,5,0,0"/>
+                            </HorizontalStackLayout>
+
+                        </StackLayout>
+                    </Border>
+
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Stroke="lightgray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10" Margin="0,0,0,0">
+                <Grid RowDefinitions="50,70,70,60,50,50,50">
+                    <!--<Border Grid.Column="0" Stroke="lightgray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10" Margin="5">-->
+                    <dxe:ComboBoxEdit x:Name="CbbWH" CornerRadius="10" LabelText="CHỌN KHO" TextFontSize="20" HeightRequest="50" VerticalOptions="Center"  TextFontAttributes="Bold" Margin="5,0">
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                    <Grid Grid.Row="1" ColumnDefinitions="60,60,110,80,140" Margin="0,10,0,0">
+                        <Label Text="TỪ" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" Margin="5,0,0,0"/>
+                        <Button Grid.Column="1" CornerRadius="10" HeightRequest="40" WidthRequest="60" BorderColor="Gray" BackgroundColor="White" BorderWidth="2" Text="SX" TextColor="Gray" FontAttributes="Bold"></Button>
+                        <Button Grid.Column="2" CornerRadius="10" HeightRequest="40" WidthRequest="80" BorderColor="Gray" BackgroundColor="White" BorderWidth="2" Text="RACK" TextColor="Gray" FontAttributes="Bold"></Button>
+                        <Button Grid.Column="3" CornerRadius="10" HeightRequest="40" WidthRequest="80" BorderColor="Gray" BackgroundColor="White" BorderWidth="2" Text="YARD" TextColor="Gray" FontAttributes="Bold"></Button>
+                        <dxe:TextEdit Grid.Column="4" CornerRadius="10" LabelText="CHI TIẾT" HeightRequest="60" TextFontAttributes="Bold" Text="{Binding TextFr}" IsReadOnly="True" Margin="10,0,0,0"></dxe:TextEdit>
+                    </Grid>
+                    <Grid Grid.Row="2" ColumnDefinitions="60,110,150,130">
+                        <Label Text="ĐẾN" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" Margin="5,0,0,0"/>
+                        <Button Grid.Column="1" CornerRadius="10" HeightRequest="40" WidthRequest="80" BorderColor="Gray" BackgroundColor="White" BorderWidth="2" Text="RACK" TextColor="Gray" FontAttributes="Bold"></Button>
+                        <Button Grid.Column="2" CornerRadius="10" HeightRequest="40" WidthRequest="80" BorderColor="Gray" BackgroundColor="White" BorderWidth="2" Text="YARD" TextColor="Gray" FontAttributes="Bold" Margin="0,0,0,0"></Button>
+                        <dxe:TextEdit Grid.Column="3" CornerRadius="10" LabelText="CHI TIẾT" HeightRequest="60" TextFontAttributes="Bold" IsReadOnly="True" Text="{Binding TextTo}"></dxe:TextEdit>
+                    </Grid>
+                    <Grid Grid.Row="3" ColumnDefinitions="*,*">
+                        <dxe:DateEdit CornerRadius="10" LabelText="NGÀY" Margin="5,0,0,0"></dxe:DateEdit>
+                        <dxe:TimeEdit Grid.Column="1" CornerRadius="10" LabelText="GIỜ" Margin="10,0,0,0"></dxe:TimeEdit>
+                    </Grid>
+                    <dxe:TextEdit Grid.Row="4" LabelText="LOT NO" CornerRadius="10" TextFontAttributes="Bold" TextFontSize="20" Text="{Binding TxtLotNo}" Margin="5,0,0,0"/>
+                    <dxe:TextEdit Grid.Row="5" LabelText="MÃ SỐ LỆNH" CornerRadius="10" TextFontSize="20" Text="{Binding TxtLenhNo}" Margin="5,0,0,0"/>
+                    <dxe:TextEdit Grid.Row="6" LabelText="MÃ MODEL" CornerRadius="10" TextFontSize="20" Text="{Binding TxtModelNo}" Margin="5,0,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+
+    </Grid>
+</ContentPage>

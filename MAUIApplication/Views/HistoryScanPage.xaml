@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dxe="clr-namespace:DevExpress.Maui.Editors;assembly=DevExpress.Maui.Editors"
+             xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:dxcv="clr-namespace:DevExpress.Maui.CollectionView;assembly=DevExpress.Maui.CollectionView"
+             xmlns:model="clr-namespace:MAUIApplication.Models"
+             xmlns:viewmodel="clr-namespace:MAUIApplication.ViewModels"
+             
+             x:Class="MAUIApplication.Views.HistoryScanPage"
+             Title="Lịch sử">
+    <Grid RowDefinitions="auto,*">
+        <Border HeightRequest="70" Margin="0,5,0,5" Stroke="gray" StrokeThickness="1" StrokeShape="RoundRectangle 10,10,10,10">
+            <Grid ColumnDefinitions="*,*,*" HeightRequest="60" Margin="10,5">
+                <dxe:DateEdit Grid.Column="0" Date ="{Binding DateFrom}" LabelText ="Từ ngày"  Margin="0,0,5,0" DisplayFormat="yyyy-MM-dd"  PickerCellMinSize="60" PickerShowTrailingDays="True"/>
+                <dxe:DateEdit Grid.Column="1" Date ="{Binding DateTo}" LabelText="Tới ngày" Margin="0,0,5,0" DisplayFormat="yyyy-MM-dd"  PickerCellMinSize="60" PickerShowTrailingDays="True"/>
+                <Button Grid.Column="2" Text="Tìm kiếm" Command="{Binding SearchResultCommand}" HeightRequest="50" Margin="0,5,0,0"></Button>
+            </Grid>
+        </Border>
+        <Border Stroke="gray" Grid.Row="1" StrokeThickness="1" Margin="2" StrokeShape="RoundRectangle 10,10,10,10">
+            <Grid RowDefinitions="30,20,*">
+                <Grid>
+                    <Label Text="Kết quả" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center"/>
+                </Grid>
+                <Grid Grid.Row="1" BackgroundColor="lightgray" Margin="10,0,10,0" >
+                    <dxcv:DXCollectionView ItemsSource="{Binding ListviewBarcodeTitleHis}">
+                        <dxcv:DXCollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="Mã sản phẩm" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                    <Label Grid.Column="1" Text="Số lượng" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                    <Label Grid.Column="2" Text="Mã NV" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                    <Label Grid.Column="3" Text="Tên NV" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                    <Label Grid.Column="4" Text="Ca làm việc" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                </Grid>
+                            </DataTemplate>
+                        </dxcv:DXCollectionView.ItemTemplate>
+                    </dxcv:DXCollectionView>
+                </Grid>
+                <!--Collection View>-->
+                <dxcv:DXCollectionView Grid.Row="2" 
+                                       AllowGroupCollapse="False"
+                                       ItemsSource="{Binding BarcodeScanResultList}">
+                    <dxcv:DXCollectionView.GroupDescription>
+                        <dxcv:GroupDescription FieldName="TimeBarcode" GroupInterval="Value"/>
+                    </dxcv:DXCollectionView.GroupDescription>
+                    
+                    <dxcv:DXCollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Frame Padding="0">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding Value}"
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HistoryScanViewModel}}, Path=QRCodeCheckResultDetailsCommand}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Value}" FontAttributes="Bold" Margin="10"/>
+                                        <Image Source="search.svg" Grid.Column="3" HeightRequest="20" WidthRequest="20"/>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.GroupHeaderTemplate>
+
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Barcode}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="1" Text="{Binding Num}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="2" Text="{Binding EmpId}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="3" Text="{Binding EmpNm}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                                <Label Grid.Column="4" Text="{Binding Shift}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                            </Grid>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+
+                </dxcv:DXCollectionView>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

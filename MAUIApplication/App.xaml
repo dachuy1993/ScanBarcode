@@ -1,0 +1,73 @@
+﻿<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:effects="clr-namespace:MAUIApplication.Effects"             
+             x:Class="MAUIApplication.App"
+             windows:Application.ImageDirectory="Assets">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#512BD4</Color>
+            <Color x:Key="PrimaryLight">#E7E3FD</Color>
+            <Color x:Key="NormalText">#55575c</Color>
+            <Color x:Key="NormalHeaderText">#55575c</Color>
+            <Color x:Key="NormalLightText">#959aa0</Color>
+            <Color x:Key="DrawerTitleTextColor">White</Color>
+            <Color x:Key="NormalBackgroundColor">White</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource DrawerTitleTextColor}"/>
+            </Style>
+            <Style x:Key="PrimaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style TargetType="Shell" ApplyToDerivedTypes="True">
+                <Setter Property="Shell.TitleColor" Value="{StaticResource DrawerTitleTextColor}" />
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource DrawerTitleTextColor}" />
+            </Style>
+            <DataTemplate x:Key="ShellMenuItemTemplate">            
+                <Grid ColumnDefinitions="51,*" ColumnSpacing="0" RowSpacing="0" Margin="0" Padding="0, 15, 0, 15" BackgroundColor="White">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryLight}" />                                            
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                    <Image x:Name="Image" Source="{Binding Icon}" HorizontalOptions="Center" effects:TintEffect.TintColor="{StaticResource Primary}"/>
+                    <Label x:Name="FlyoutItemLabel" Text="{Binding Title}"
+                        Grid.Column="1"
+                        TextColor="{StaticResource NormalText}"
+                        Margin="0,0,0,0"
+                        VerticalOptions="Center"
+                        FontFamily="Roboto"
+                        HorizontalOptions="StartAndExpand">                            
+                    </Label>
+                </Grid>
+           </DataTemplate>
+            <Style x:Key="ListViewScan" TargetType="ListView">
+                <Setter Property="Background" Value="Blue"/>
+                
+            </Style>
+            <Style x:Key="ButtonON" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Green"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style x:Key="ButtonOFF" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Red"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style x:Key="ButtonO" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
